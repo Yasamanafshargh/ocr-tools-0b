@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Translation Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Translation Result</h1>
+        </header>
+
+        <main>
+            <section class="result-container">
+                <div class="result-box">
+                    <h2>Original Text</h2>
+                    <p>{{ original_text }}</p>
+                </div>
+
+                <div class="result-box">
+                    <h2>Translated Text</h2>
+                    <p style="direction: rtl;">{{ translated_text }}</p>
+                </div>
+            </section>
+
+            <div class="actions">
+                <a href="/" class="go-back-btn">Go Back</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 OCR Translation. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

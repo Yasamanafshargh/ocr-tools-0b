@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OCR & Translation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h1>OCR & Translation</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <h1>OCR & Translation</h1>
+            <p>Upload an image or document, extract text, and translate it to your chosen language.</p>
+        </header>
+
+        <main>
+            <form action="/" method="POST" enctype="multipart/form-data" class="form-container">
+                <div class="form-group">
+                    <label for="file">Select File</label>
+                    <input type="file" name="file" id="file" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="target_lang">Destination Language</label>
+                    <select name="target_lang" id="target_lang" required>
+                        <option value="en">English</option>
+                        <option value="fa">Persian (Farsi)</option>
+                        <option value="fr">French</option>
+                        <option value="es">Spanish</option>
+                        <option value="de">German</option>
+                        <option value="it">Italian</option>
+                        <option value="ru">Russian</option>
+                        <option value="zh-cn">Chinese (Simplified)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">Extract & Translate</button>
+            </form>
+        </main>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 OCR Translation. All Rights Reserved.</p>
+            <div id="contact">
+                <p>Contact us at: <a href="mailto:support@ocrtranslation.com">support@ocrtranslation.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
