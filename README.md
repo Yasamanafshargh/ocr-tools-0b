@@ -72,8 +72,8 @@ Translated Text (Persian): سلام دنیا</code></pre>
 <p>Here are some example screenshots of the application:</p>
 
 <!-- Replace the image paths with your actual images -->
-<img src="images/screenshot1.png" alt="App Screenshot 1" width="600">
-<img src="images/screenshot2.png" alt="App Screenshot 2" width="600">
+<img src="docs\screenshots\upload.png" alt="App Screenshot 1" width="600">
+<img src="docs\screenshots\result.png" alt="App Screenshot 2" width="600">
 
 <h2 id="notes">Notes</h2>
 <ul>
