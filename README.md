@@ -6,21 +6,21 @@ Built with Flask, it uses Tesseract OCR for text extraction and Google Translate
 
 Note: In this version, the app works best for images containing English text. Support for more languages and document types will be added in future versions.
 
-✨ Features
+Features
 
-📷 Extract text from images (.png, .jpg, .jpeg)
+Extract text from images (.png, .jpg, .jpeg)
 
-📑 Extract text from PDF files
+Extract text from PDF files
 
-📄 Extract text from DOCX files
+Extract text from DOCX files
 
-🌍 Translate extracted text into any target language
+Translate extracted text into any target language
 
-🖥️ Simple web interface for uploading files and viewing results
+Simple web interface for uploading files and viewing results
 
-⚡ Lightweight & easy to deploy
+Lightweight & easy to deploy
 
-📂 Project Structure
+Project Structure
 .
 ├── app.py                  # Main Flask app
 ├── utils/
@@ -33,20 +33,27 @@ Note: In this version, the app works best for images containing English text. Su
 ├── requirements.txt        # Python dependencies
 └── README.md               # Project documentation
 
-⚙️ Installation
-1. Clone the repository
+Installation
+
+Clone the repository
+
 git clone https://github.com/yourusername/ocr-translate-app.git
 cd ocr-translate-app
 
-2. Create a virtual environment (recommended)
+
+Create a virtual environment (recommended)
+
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
-3. Install dependencies
+
+Install dependencies
+
 pip install -r requirements.txt
 
-4. Install Tesseract OCR
+
+Install Tesseract OCR
 
 Ubuntu/Debian:
 
@@ -62,21 +69,21 @@ Windows:
 Download the installer
  and add it to your PATH.
 
-▶️ Usage
+Usage
 
 Run the Flask server:
 
 python app.py
 
 
-Open in browser:
+Open in your browser:
 
 http://127.0.0.1:5000
 
 
 Upload a file → Select target language → Get extracted & translated text.
 
-📦 Requirements
+Requirements
 fastapi
 uvicorn
 pytesseract
@@ -89,9 +96,6 @@ python-multipart
 Flask
 
 Demo
-
-![Upload Page](docs/screenshots/upload.png)  
-![Result Page](docs/screenshots/result.png)  
 
 
 
@@ -108,6 +112,6 @@ Deploy with Docker
 
 Provide an API version with FastAPI
 
-👩‍💻 Author
+Author
 
 Yasaman Afshar Ghasemloo
