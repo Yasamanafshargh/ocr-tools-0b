@@ -1,0 +1,71 @@
+import io
+import os
+import pytest
+from app import app
+
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    app.config['UPLOAD_FOLDER'] = 'test_uploads'
+    with app.test_client() as client:
+        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+        yield client
+        # Clean up uploaded files after test
+        for f in os.listdir(app.config['UPLOAD_FOLDER']):
+            os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
+        os.rmdir(app.config['UPLOAD_FOLDER'])
+
+def test_home_get(client):
+    response = client.get('/')
+    assert response.status_code == 200
+    assert b'<form' in response.data  # The upload form is rendered
+
+def test_home_post_image(client, mocker):
+    # Mock OCR and translation
+    mocker.patch('utils.ocr_utils.extract_text_from_image', return_value='hello world')
+    mocker.patch('utils.translate_utils.translate_text', return_value='hola mundo')
+
+    data = {
+        'file': (io.BytesIO(b"fake image data"), 'test.png'),
+        'target_lang': 'es'
+    }
+    response = client.post('/', data=data, content_type='multipart/form-data')
+    assert response.status_code == 200
+    assert b'hello world' in response.data
+    assert b'hola mundo' in response.data
+
+def test_home_post_pdf(client, mocker):
+    mocker.patch('utils.ocr_utils.extract_text_from_pdf', return_value='pdf text')
+    mocker.patch('utils.translate_utils.translate_text', return_value='texte pdf')
+    data = {
+        'file': (io.BytesIO(b"%PDF-1.4"), 'test.pdf'),
+        'target_lang': 'fr'
+    }
+    response = client.post('/', data=data, content_type='multipart/form-data')
+    assert response.status_code == 200
+    assert b'pdf text' in response.data
+    assert b'texte pdf' in response.data
+
+def test_home_post_docx(client, mocker):
+    mocker.patch('utils.ocr_utils.extract_text_from_docx', return_value='docx text')
+    mocker.patch('utils.translate_utils.translate_text', return_value='texto docx')
+    data = {
+        'file': (io.BytesIO(b"PK\x03\x04"), 'test.docx'),
+        'target_lang': 'es'
+    }
+    response = client.post('/', data=data, content_type='multipart/form-data')
+    assert response.status_code == 200
+    assert b'docx text' in response.data
+    assert b'texto docx' in response.data
+
+def test_home_post_unsupported(client):
+    data = {
+        'file': (io.BytesIO(b"data"), 'test.txt'),
+        'target_lang': 'es'
+    }
+    # Patch translate_text to avoid error on "Unsupported file format."
+    import utils.translate_utils
+    utils.translate_utils.translate_text = lambda text, lang: text
+    response = client.post('/', data=data, content_type='multipart/form-data')
+    assert response.status_code == 200
+    assert b'Unsupported file format.' in response.data
